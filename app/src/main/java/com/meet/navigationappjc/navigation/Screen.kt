@@ -9,6 +9,6 @@ const val DetailScreenPath="DetailScreen"
 const val LastScreenPath="LastScreen"
 sealed class Screen(val route: String) {
     object HomeScreen : Screen(HomeScreenPath)
-    object DetailScreen : Screen(DetailScreenPath)
+    object DetailScreen : Screen("$DetailScreenPath/{name}/{age}")
     object LastScreen : Screen(LastScreenPath)
 }

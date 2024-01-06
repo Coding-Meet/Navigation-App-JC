@@ -2,8 +2,10 @@ package com.meet.navigationappjc.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.meet.navigationappjc.screens.DetailScreen
 import com.meet.navigationappjc.screens.HomeScreen
 import com.meet.navigationappjc.screens.LastScreen
@@ -25,9 +27,19 @@ fun SetupNavGraph(navController: NavHostController) {
             HomeScreen(navController)
         }
         composable(
-            route = Screen.DetailScreen.route
+            route = Screen.DetailScreen.route,
+            arguments = listOf(
+                navArgument("name"){
+                    type = NavType.StringType
+                },
+                navArgument("age"){
+                    type = NavType.IntType
+                }
+            )
         ){
-            DetailScreen(navController)
+            val name = it.arguments?.getString("name","") ?: ""
+            val age = it.arguments?.getInt("age",0) ?: 0
+            DetailScreen(navController,name,age)
         }
         composable(
             route = Screen.LastScreen.route

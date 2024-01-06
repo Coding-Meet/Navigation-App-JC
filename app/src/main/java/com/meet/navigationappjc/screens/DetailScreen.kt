@@ -20,7 +20,7 @@ import com.meet.navigationappjc.navigation.Screen
  */
 
 @Composable
-fun DetailScreen(navController: NavController) {
+fun DetailScreen(navController: NavController, name: String, age: Int) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -29,7 +29,11 @@ fun DetailScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Detail Screen",
+            text = "Name: $name",
+            fontSize = 40.sp
+        )
+        Text(
+            text = "age: $age",
             fontSize = 40.sp
         )
         Button(onClick = {
