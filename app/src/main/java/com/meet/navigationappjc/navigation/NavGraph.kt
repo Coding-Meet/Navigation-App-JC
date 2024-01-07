@@ -31,9 +31,11 @@ fun SetupNavGraph(navController: NavHostController) {
             arguments = listOf(
                 navArgument("name"){
                     type = NavType.StringType
+                    defaultValue = ""
                 },
                 navArgument("age"){
                     type = NavType.IntType
+                    defaultValue = 10
                 }
             )
         ){

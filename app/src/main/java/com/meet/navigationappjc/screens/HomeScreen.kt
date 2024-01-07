@@ -58,8 +58,16 @@ fun HomeScreen(navController: NavController) {
         }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
         Spacer(modifier = Modifier.padding(10.dp))
         Button(onClick = {
-            if (name.isNotEmpty() && age.isNotEmpty()){
-                navController.navigate("$DetailScreenPath/$name/${age.toInt()}")
+            if (name.trim().isNotEmpty() && age.trim().isNotEmpty()
+                ){
+                // All Argument Required
+//                navController.navigate("$DetailScreenPath/$name/${age.toInt()}")
+              // name argument send
+//                navController.navigate("$DetailScreenPath/${name.trim()}")
+
+                // name and age both are optional argument
+//                navController.navigate("$DetailScreenPath?age=${age.trim().toInt()}")
+                navController.navigate("$DetailScreenPath?name=${name}&age=${age.trim().toInt()}")
             }
         }) {
             Text(

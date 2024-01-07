@@ -9,6 +9,14 @@ const val DetailScreenPath="DetailScreen"
 const val LastScreenPath="LastScreen"
 sealed class Screen(val route: String) {
     object HomeScreen : Screen(HomeScreenPath)
-    object DetailScreen : Screen("$DetailScreenPath/{name}/{age}")
+
+    // All Argument Required
+//    object DetailScreen : Screen("$DetailScreenPath/{name}/{age}")
+
+    // only name argument pass
+//    object DetailScreen : Screen("$DetailScreenPath/{name}?age={age}")
+
+    // name and age both are optional argument
+    object DetailScreen : Screen("$DetailScreenPath?name={name}&age={age}")
     object LastScreen : Screen(LastScreenPath)
 }
