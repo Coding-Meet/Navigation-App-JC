@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.meet.navigationappjc.models.User
 import com.meet.navigationappjc.navigation.DetailScreenPath
 import com.meet.navigationappjc.navigation.Screen
 
@@ -67,7 +68,21 @@ fun HomeScreen(navController: NavController) {
 
                 // name and age both are optional argument
 //                navController.navigate("$DetailScreenPath?age=${age.trim().toInt()}")
-                navController.navigate("$DetailScreenPath?name=${name}&age=${age.trim().toInt()}")
+
+                // both data argument pass
+//                navController.navigate("$DetailScreenPath?name=${name}&age=${age.trim().toInt()}")
+
+                val user = User(
+                    name.trim(),
+                    age.trim().toInt()
+                )
+
+                navController.currentBackStackEntry?.savedStateHandle?.apply {
+                    set("user",user)
+                }
+//                navController.popBackStack()
+                navController.navigate(Screen.DetailScreen.route)
+
             }
         }) {
             Text(

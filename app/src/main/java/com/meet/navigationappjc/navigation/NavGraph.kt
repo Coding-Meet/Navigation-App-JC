@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.meet.navigationappjc.models.User
 import com.meet.navigationappjc.screens.DetailScreen
 import com.meet.navigationappjc.screens.HomeScreen
 import com.meet.navigationappjc.screens.LastScreen
@@ -28,20 +29,22 @@ fun SetupNavGraph(navController: NavHostController) {
         }
         composable(
             route = Screen.DetailScreen.route,
-            arguments = listOf(
-                navArgument("name"){
-                    type = NavType.StringType
-                    defaultValue = ""
-                },
-                navArgument("age"){
-                    type = NavType.IntType
-                    defaultValue = 10
-                }
-            )
+//            arguments = listOf(
+//                navArgument("name"){
+//                    type = NavType.StringType
+//                    defaultValue = ""
+//                },
+//                navArgument("age"){
+//                    type = NavType.IntType
+//                    defaultValue = 10
+//                }
+//            )
         ){
-            val name = it.arguments?.getString("name","") ?: ""
-            val age = it.arguments?.getInt("age",0) ?: 0
-            DetailScreen(navController,name,age)
+           val user =  navController.previousBackStackEntry?.savedStateHandle?.get<User>("user") ?: User()
+
+//            val name = it.arguments?.getString("name","") ?: ""
+//            val age = it.arguments?.getInt("age",0) ?: 0
+            DetailScreen(navController,user.name,user.age)
         }
         composable(
             route = Screen.LastScreen.route

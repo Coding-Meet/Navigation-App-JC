@@ -17,6 +17,9 @@ sealed class Screen(val route: String) {
 //    object DetailScreen : Screen("$DetailScreenPath/{name}?age={age}")
 
     // name and age both are optional argument
-    object DetailScreen : Screen("$DetailScreenPath?name={name}&age={age}")
+//    object DetailScreen : Screen("$DetailScreenPath?name={name}&age={age}")
+
+    // no argument
+    object DetailScreen : Screen(DetailScreenPath)
     object LastScreen : Screen(LastScreenPath)
 }
