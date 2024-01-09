@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.meet.navigationappjc.navigation.Screen
+import com.meet.navigationappjc.sharedviewmodel.UserScreenViewModel
 
 /**
  * @author Coding Meet
@@ -20,7 +21,7 @@ import com.meet.navigationappjc.navigation.Screen
  */
 
 @Composable
-fun DetailScreen(navController: NavController, name: String, age: Int) {
+fun DetailScreen(navController: NavController, name: String, age: Int,userScreenViewModel: UserScreenViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
