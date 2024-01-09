@@ -20,6 +20,7 @@ sealed class Screen(val route: String) {
 //    object DetailScreen : Screen("$DetailScreenPath?name={name}&age={age}")
 
     // no argument
-    object DetailScreen : Screen(DetailScreenPath)
+//    object DetailScreen : Screen(DetailScreenPath)
+    object DetailScreen : Screen("$DetailScreenPath/{user}")
     object LastScreen : Screen(LastScreenPath)
 }

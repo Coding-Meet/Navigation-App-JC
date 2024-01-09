@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import com.meet.navigationappjc.models.User
 import com.meet.navigationappjc.navigation.DetailScreenPath
 import com.meet.navigationappjc.navigation.Screen
+import com.squareup.moshi.Moshi
 
 /**
  * @author Coding Meet
@@ -32,7 +33,7 @@ import com.meet.navigationappjc.navigation.Screen
  */
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController,moshi: Moshi) {
     var name by remember {
         mutableStateOf("")
     }
@@ -77,11 +78,16 @@ fun HomeScreen(navController: NavController) {
                     age.trim().toInt()
                 )
 
-                navController.currentBackStackEntry?.savedStateHandle?.apply {
-                    set("user",user)
-                }
-//                navController.popBackStack()
-                navController.navigate(Screen.DetailScreen.route)
+                val userStr = moshi.adapter(User::class.java).toJson(user)
+                navController.navigate("$DetailScreenPath/$userStr")
+
+
+                // saved State handler data class passing
+//                navController.currentBackStackEntry?.savedStateHandle?.apply {
+//                    set("user",user)
+//                }
+////                navController.popBackStack()
+//                navController.navigate(Screen.DetailScreen.route)
 
             }
         }) {

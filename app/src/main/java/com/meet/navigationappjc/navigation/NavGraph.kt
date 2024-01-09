@@ -10,6 +10,7 @@ import com.meet.navigationappjc.models.User
 import com.meet.navigationappjc.screens.DetailScreen
 import com.meet.navigationappjc.screens.HomeScreen
 import com.meet.navigationappjc.screens.LastScreen
+import com.squareup.moshi.Moshi
 
 /**
  * @author Coding Meet
@@ -17,7 +18,7 @@ import com.meet.navigationappjc.screens.LastScreen
  */
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(navController: NavHostController,moshi: Moshi) {
     NavHost(
         navController = navController,
         startDestination = Screen.HomeScreen.route
@@ -25,11 +26,15 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(
             route = Screen.HomeScreen.route
         ){
-            HomeScreen(navController)
+            HomeScreen(navController,moshi)
         }
         composable(
             route = Screen.DetailScreen.route,
-//            arguments = listOf(
+            arguments = listOf(
+                navArgument("user"){
+                    type = NavType.StringType
+                    defaultValue = ""
+                },
 //                navArgument("name"){
 //                    type = NavType.StringType
 //                    defaultValue = ""
@@ -38,13 +43,17 @@ fun SetupNavGraph(navController: NavHostController) {
 //                    type = NavType.IntType
 //                    defaultValue = 10
 //                }
-//            )
+            )
         ){
-           val user =  navController.previousBackStackEntry?.savedStateHandle?.get<User>("user") ?: User()
+
+            it.arguments?.getString("user")?.let {userStr ->
+                val user = moshi.adapter(User::class.java).fromJson(userStr)!!
+                DetailScreen(navController,user.name,user.age)
+            }
+//           val user =  navController.previousBackStackEntry?.savedStateHandle?.get<User>("user") ?: User()
 
 //            val name = it.arguments?.getString("name","") ?: ""
 //            val age = it.arguments?.getInt("age",0) ?: 0
-            DetailScreen(navController,user.name,user.age)
         }
         composable(
             route = Screen.LastScreen.route
